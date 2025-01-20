@@ -5,86 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation Bar Example</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #333;
-            padding: 0.5rem 1rem;
-            color: white;
-        }
-
-        .navbar a {
-            text-decoration: none;
-            color: white;
-            margin: 0 1rem;
-            transition: color 0.3s;
-        }
-
-        .navbar a:hover {
-            color: #f0a500;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .menu {
-            display: flex;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .menu li {
-            margin: 0 1rem;
-        }
-
-        .menu li a {
-            text-transform: uppercase;
-        }
-
-        .menu-button {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .menu {
-                display: none;
-                flex-direction: column;
-                background-color: #444;
-                position: absolute;
-                top: 100%;
-                right: 0;
-                width: 100%;
-            }
-
-            .menu.show {
-                display: flex;
-            }
-
-            .menu li {
-                margin: 1rem 0;
-                text-align: center;
-            }
-
-            .menu-button {
-                display: block;
-            }
-        }
-    </style>
+    <!-- <style></style> -->
+    <link rel="stylesheet" href="css/main.css" />
 </head>
 
 <body>
@@ -101,12 +23,45 @@
         </ul>
     </div>
 
+    <div class="hero-section">
+        <div class="carousel">
+            <img src="img/slide1.jpg" alt="Marble Slide 1">
+            <img src="img/slide2.jpg" alt="Marble Slide 2">
+            <img src="img/slide3.jpg" alt="Marble Slide 3">
+        </div>
+        <div class="carousel-controls">
+            <button onclick="prevSlide()">&#10094;</button>
+            <button onclick="nextSlide()">&#10095;</button>
+        </div>
+        <div class="hero-content">
+            <h1>Welcome to RK Marble</h1>
+            <a href="Product.html" target="_blank">View Products</a>
+        </div>
+    </div>
+
     <script>
-        function toggleMenu() {
-            const menu = document.querySelector('.menu');
-            menu.classList.toggle('show');
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
+            });
         }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        showSlide(currentSlide);
     </script>
+
 
 </body>
 
